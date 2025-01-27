@@ -1,0 +1,16 @@
+services:
+
+  db:
+    image: postgres:16.3
+    container_name: chaos-db
+    environment:
+      POSTGRES_DB: chaos
+      POSTGRES_USER: greenhorn
+      POSTGRES_PASSWORD: pa55w0rd
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  db-data:
