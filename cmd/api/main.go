@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/xurl/internal/db"
 	"github.com/xurl/internal/env"
+	"github.com/xurl/internal/store"
 	"log"
 )
 
@@ -28,6 +29,7 @@ func main() {
 
 	app := &application{
 		config: cfg,
+		store:  &store.URLStore{Db: database},
 	}
 
 	mux := app.mount()

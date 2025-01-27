@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/go-chi/chi/v5"
+	"github.com/xurl/internal/store"
 	"log"
 	"net/http"
 	"time"
@@ -9,6 +10,7 @@ import (
 
 type application struct {
 	config config
+	store  store.Store
 }
 
 type config struct {
