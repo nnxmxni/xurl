@@ -25,9 +25,20 @@ func ParseJSON(w http.ResponseWriter, r *http.Request, payload interface{}) erro
 	return nil
 }
 
-func WriteJSON(w http.ResponseWriter, r *http.Request, status int, response interface{}) error {
+func WriteJSON(w http.ResponseWriter, r *http.Request, status int, response APIResponseBody) error {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+func WriteError(w http.ResponseWriter, r *http.Request, status int, err error) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+
+	response := APIResponseBody{
+		Message: err.Error(),
+	}
 
 	return json.NewEncoder(w).Encode(response)
 }
