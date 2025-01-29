@@ -2,7 +2,7 @@ package util
 
 import (
 	"encoding/json"
-	"fmt"
+	"errors"
 	"github.com/go-playground/validator/v10"
 	"math/rand"
 	"net/http"
@@ -17,7 +17,7 @@ type APIResponseBody struct {
 
 func ParseJSON(w http.ResponseWriter, r *http.Request, payload interface{}) error {
 	if r.Body == nil {
-		return fmt.Errorf("request body is empty")
+		return errors.New("request body is empty")
 	}
 
 	maxBytes := 1_048_576
@@ -27,7 +27,7 @@ func ParseJSON(w http.ResponseWriter, r *http.Request, payload interface{}) erro
 	decoder.DisallowUnknownFields()
 
 	if err := decoder.Decode(&payload); err != nil {
-		return fmt.Errorf("request body is empty")
+		return errors.New("request body is empty")
 	}
 
 	return nil
