@@ -31,7 +31,10 @@ func (app *application) mount() http.Handler {
 
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
-	
+
+	r.Post("/api/create", app.createShortenedUrlHandler)
+	r.Get("/api/{slug}", app.getOriginalUrlHandler)
+
 	return r
 }
 
